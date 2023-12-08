@@ -5,7 +5,6 @@ function App() {
   // Variables:
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isWrongDetails, setIsWrongDetails] = useState(false);
 
@@ -19,7 +18,6 @@ function App() {
     } 
     else {
       setIsWrongDetails(true);
-      setError("Invalid details. Please try again.");
     }
   };
 
@@ -38,7 +36,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="WholePage">
       {(isLoggedIn) ? (
         // Render WelcomeMessage if user is logged in
         <div className= "WelcomeMessage">
@@ -48,17 +46,20 @@ function App() {
         ) : (
           <>
           {(isWrongDetails) ? (
-            <div className= "WelcomeMessage">
+            <div className= "ErrorMessage">
               <p>Sorry, we don't recognise those details. Please try again.</p>
               <button onClick = {handleWrongDetails}> Try again</button>
             </div>
           ) : ( 
             <form onSubmit={handleLogin}>
-              <label>Username:</label>
-              <input type='email' name='username' id='username' value={username} onChange={(e) => setUsername(e.target.value)}/>
-              <label>Password:</label>
-              <input type='password' name='password' id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-              <input type='submit' value='Login'/>
+              <div>
+                <label>Username:</label>
+                <input type='email' name='username' id='username' value={username} onChange={(e) => setUsername(e.target.value)}/>
+                <label>Password:</label>
+                <input type='password' name='password' id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <br/>
+                <input type='submit' value='Login'/>
+              </div>
             </form>
              )
           }
